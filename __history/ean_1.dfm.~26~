@@ -1,0 +1,134 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 469
+  ClientWidth = 407
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 24
+    Top = 8
+    Width = 70
+    Height = 13
+    Caption = 'Wspolczynniki:'
+  end
+  object Label2: TLabel
+    Left = 25
+    Top = 54
+    Width = 69
+    Height = 13
+    Caption = 'St. wielomianu'
+  end
+  object Label3: TLabel
+    Left = 120
+    Top = 54
+    Width = 3
+    Height = 13
+  end
+  object Label4: TLabel
+    Left = 24
+    Top = 80
+    Width = 29
+    Height = 13
+    Caption = 'max it'
+  end
+  object Label5: TLabel
+    Left = 24
+    Top = 104
+    Width = 35
+    Height = 13
+    Caption = 'mincorr'
+  end
+  object Label6: TLabel
+    Left = 22
+    Top = 131
+    Width = 37
+    Height = 13
+    Caption = 'zerodet'
+  end
+  object Label7: TLabel
+    Left = 246
+    Top = 70
+    Width = 60
+    Height = 13
+    Caption = 'Arytmetyka:'
+  end
+  object Label8: TLabel
+    Left = 312
+    Top = 70
+    Width = 81
+    Height = 13
+  end
+  object ListBox1: TListBox
+    Left = 8
+    Top = 172
+    Width = 281
+    Height = 289
+    ItemHeight = 13
+    TabOrder = 0
+  end
+  object Edit1: TEdit
+    Left = 24
+    Top = 27
+    Width = 249
+    Height = 21
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 324
+    Top = 131
+    Width = 75
+    Height = 25
+    Caption = 'Licz'
+    TabOrder = 2
+    OnClick = Button1Click
+  end
+  object Edit2: TEdit
+    Left = 72
+    Top = 77
+    Width = 121
+    Height = 21
+    TabOrder = 3
+  end
+  object Edit3: TEdit
+    Left = 72
+    Top = 101
+    Width = 121
+    Height = 21
+    TabOrder = 4
+  end
+  object Edit4: TEdit
+    Left = 72
+    Top = 128
+    Width = 121
+    Height = 21
+    TabOrder = 5
+  end
+  object Button2: TButton
+    Left = 312
+    Top = 39
+    Width = 87
+    Height = 25
+    Caption = 'Przedzia'#322'owa'
+    TabOrder = 6
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 312
+    Top = 8
+    Width = 87
+    Height = 25
+    Caption = 'Zmiennopozyc.'
+    TabOrder = 7
+    OnClick = Button3Click
+  end
+end
