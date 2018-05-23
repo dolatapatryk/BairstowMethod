@@ -34,6 +34,11 @@ type interval = record
                   class operator Multiply (x, y : interval) : interval;
                   class operator Divide (x, y : interval) : interval;
                   class operator Equal (x,y:Interval):boolean;
+                  class operator NotEqual(x, y : interval) : Boolean;
+                  class operator GreaterThan(x, y : interval) : Boolean;
+                  class operator LessThan(x, y : interval) : Boolean;
+                  class operator GreaterThanOrEqual(x, y : interval) : Boolean;
+                  class operator LessThanOrEqual(x,y:interval) : Boolean;
                 end;
 
 // Functions for basic arithmetic operations for proper intervals (one can use
@@ -44,7 +49,11 @@ function iadd (const x, y : interval) : interval;
 function isub (const x, y : interval) : interval;
 function imul (const x, y : interval) : interval;
 function idiv (const x, y : interval) : interval;
-function iequal (const x,y:interval):boolean;
+function iequal(const x, y : interval) : Boolean;
+function igreaterthan(const x, y : interval) : Boolean;
+function ilessthan(const x, y : interval) : Boolean;
+function iabs(const x : interval) : interval;
+//function iabs(const x : interval) : interval;
 
 // Basic interval type with definitions of overloading operators for directed
 // (improper) intervals
@@ -377,6 +386,82 @@ implementation
   begin
     Result:=idiv(x, y)
   end {Divide};
+
+  function iequal (const x, y : interval) : Boolean;
+  begin
+    Result := true; // isub(x, y) = 0;
+    SetRoundMode (rmDown);
+    if x.a<>y.a then
+      Result := false;
+    SetRoundMode (rmUp);
+    if x.b<>y.b then
+      Result := false;
+    SetRoundMode (rmNearest)
+  end {iequal};
+
+  class operator interval.Equal (x, y : interval) : Boolean;
+  begin
+    Result:=iequal(x, y)
+  end {Equal};
+
+  class operator interval.NotEqual(x, y : interval) : Boolean;
+  begin
+    Result := not iequal(x, y)
+  end {NotEqual};
+
+  function igreaterthan (const x, y : interval) : Boolean;
+  begin
+    Result := isub(x, y).a > 0
+  end {igreaterthan};
+
+  class operator interval.GreaterThan (x, y : interval) : Boolean;
+  begin
+    Result:=igreaterThan(x, y)
+  end {GreaterThan};
+
+  function ilessthan (const x, y : interval) : Boolean;
+  begin
+    Result := isub(x, y).b < 0
+  end {ilessthan};
+
+  class operator interval.LessThan (x, y : interval) : Boolean;
+  begin
+    Result:=ilessthan(x, y)
+  end {LessThan};
+
+  class operator interval.GreaterThanOrEqual (x, y : interval) : Boolean;
+  begin
+    Result := not ilessthan(x, y)
+  end {GreaterThanOrEqual};
+
+  class operator interval.LessThanOrEqual (x, y : interval) : Boolean;
+  begin
+    Result := not igreaterthan(x, y)
+  end {LessThanOrEqual};
+
+  function iabs (const x : interval) : interval;
+  var
+    left_abs, right_abs : Extended;
+  begin
+    SetRoundMode (rmDown);
+    left_abs := abs(x.a);
+    SetRoundMode (rmUp);
+    right_abs := abs(x.b);
+    SetRoundMode (rmNearest);
+
+    if left_abs < right_abs then
+    begin
+      Result.a := left_abs;
+      Result.b := right_abs;
+    end
+    else
+    begin
+      Result.a := right_abs;
+      Result.b := left_abs;
+    end;
+    if (x.a<=0.0) and (x.b>=0.0) then
+      Result.a := 0
+  end {iabs};
 
   class operator dinterval.Implicit (x : Extended) : dinterval;
   var s : string;
@@ -829,22 +914,6 @@ implementation
     Result:=didiv(x, y)
   end {dDivide};
 
-  function iequal;
-  begin
-    Result:=true;
-    SetRoundMode(rmDown);
-    if x.a<>y.a then
-      Result:=false;
-    SetRoundMode(rmUp);
-    if x.b<>y.b then
-      Result:=false;
-    SetRoundMode(rmNearest);
-  end;
-
-  class operator interval.Equal(x,y:Interval): Boolean;
-  begin
-    Result:=iequal(x,y);
-  end;
 
   procedure to_fixed_point (const awzi      : char_tab;
                             var significand : string);

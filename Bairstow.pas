@@ -23,7 +23,7 @@ procedure BairstowNormal(n          : Integer;
 procedure BairstowInterval(n:Integer;
                     a:vectorInterval;
                     mit:Integer;
-                    mincorr,zerodet:Interval;
+                    mincorr,zerodet:Extended;
                     var z,w:cplxvectorInterval;
                     var it,st:Integer);
 function najmniejszaWartoscBezwzgledna(x:Interval):Extended;
@@ -194,11 +194,10 @@ var i,k,n1,st1                       : Integer;
     m,p,pq0,pq1,q,q0,q1,q2,q3,q4 : Interval;
     cond,endpq                   : Boolean;
     b                            : vectorInterval;
-    zero,tmp                       : Interval;
+    tmp                       : Interval;
 begin
-  zero:=0;
   SetLength(b,n+1);
-  if (n<1) or (mit<1) or (mincorr.b<=0) or (zerodet.b<=0)
+  if (n<1) or (mit<1) or (mincorr<=0) or (zerodet<=0)
     then st:=1
     else begin
            for i:=0 to n do
@@ -244,22 +243,22 @@ begin
                                      q2:=q3;
                                      q3:=q4
                                    end;
-                                 if (absInterval(q2)+absInterval(q3)).b<zerodet.a
+                                 if iabs(q2)+iabs(q3)<zerodet
                                    then endpq:=false
                                    else begin
                                           m:=q*q0+p*q1;
                                           q4:=q1*q1+m*q0;
-                                          if absInterval(q4).b<zerodet.a
+                                          if iabs(q4)<zerodet
                                             then st:=2
                                             else begin
                                                    q0:=(q1*q2-q0*q3)/q4;
                                                    q1:=(m*q2+q1*q3)/q4;
-                                                   q2:=absInterval(q0);
-                                                   q3:=absInterval(q1);
-                                                   if (q2.a>mincorr.b)
-                                                     or (q3.a>mincorr.b)
-                                                     or (q2.b<pq0.a)
-                                                     and (q3.b<pq1.a)
+                                                   q2:=iabs(q0);
+                                                   q3:=iabs(q1);
+                                                   if (q2>mincorr)
+                                                     or (q3>mincorr)
+                                                     or (q2<pq0)
+                                                     and (q3<pq1)
                                                      then begin
                                                             p:=p+q0;
                                                             pq0:=q2;
@@ -277,8 +276,8 @@ begin
                         then begin
                                m:=-p/2;
                                q0:=m*m-q;
-                               q1:=isqrt(absInterval(q0),st1);
-                               if q0.b<0
+                               q1:=isqrt(iabs(q0),st1);
+                               if q0<0
                                  then begin
                                         z[i].re:=m;
                                         z[i+1].re:=m;
@@ -286,11 +285,11 @@ begin
                                         z[i+1].im:=-q1
                                       end
                                  else begin
-                                        if m.a>0
+                                        if m>0
                                           then m:=m+q1
                                           else m:=m-q1;
                                         z[i+1].re:=m;
-                                        if absInterval(m)=0
+                                        if iabs(m)=0
                                           then z[i].re:=0
                                           else z[i].re:=q/m;
                                         z[i].im:=0;
@@ -330,8 +329,14 @@ begin
                           else begin
                                  q0:=isqrt(isqr(p,st1)+isqr(q,st1),st1);
                                  //q3:=2*arctan(q/(p+q0));
-                                 tmp.a:=arctan(q.a/(p.a+q0.a));
-                                 tmp.b:=arctan(q.b/(p.b+q0.b));
+                                 tmp:=q/(p+q0);
+                                 //tmp.a:=arctan(q.a/(p.a+q0.a));
+                                 //tmp.b:=arctan(q.b/(p.b+q0.b));
+                                 //q3:=2*tmp;
+                                 //q3.a:=2*arctan(tmp.a);
+                                 //q3.b:=2*arctan(tmp.b);
+                                 tmp.a:=arctan(tmp.a);
+                                 tmp.b:=arctan(tmp.b);
                                  q3:=2*tmp;
                                  q4:=n*q3;
                                  q2:=q1*isin(q4,st1);

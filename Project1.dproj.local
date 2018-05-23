@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.494,C:\Users\Patryk\Desktop\pp\EAN\ean_1\Bairstow.pas=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.205,C:\Users\Patryk\Desktop\pp\ean\Project1.dproj=C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.653,C:\Users\Patryk\Desktop\pp\ean\ean_1.dfm=C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.653,C:\Users\Patryk\Desktop\pp\ean\ean_1.pas=C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.932,=C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.821,C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit1.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.852,=C:\Users\Patryk\Desktop\pp\ean\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.932,=C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.653,C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Patryk\Desktop\pp\ean\ean_1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.653,C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Patryk\Desktop\pp\ean\ean_1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.936,C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.694,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.236,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.205,C:\Users\Patryk\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Patryk\Desktop\pp\ean\Project1.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.009,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.418,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.009,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.494,C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Bairstow.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.236,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.694,=C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.936,C:\Users\Patryk\Desktop\pp\EAN\ean_1\Unit2.pas=</Transaction>
   </Transactions>
 </BorlandProject>
