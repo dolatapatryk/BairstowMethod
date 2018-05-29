@@ -25,7 +25,7 @@ TForm1 = class(TForm)
     Label7: TLabel;
     Label8: TLabel;
     procedure Wypisz(z,w:cplxvector; it,st:Integer; ListBox1:TListBox);
-    procedure WypiszInterval(z,w:cplxvectorInterval, it,st:Integer, ListBox1:TListBox);
+    procedure WypiszInterval(zInterval,wInterval:cplxvectorInterval; it,st:Integer; ListBox1:TListBox);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -67,6 +67,7 @@ I: Integer;
 
 begin
 ListBox1.Clear;
+//zmiennopozycyjna
 if(state=true) then
 begin
 SetLength(a,0);
@@ -89,6 +90,7 @@ zerodet:=StrToFloat(Edit4.Text);
 BairstowNormal(n,a,mit,mincorr,zerodet,z,w,it,st);
 Wypisz(z,w,it,st,ListBox1);
 end
+//przedzialowa
 else if(state=false) then
 begin
 SetLength(aInterval,0);
@@ -109,9 +111,8 @@ mincorr:=StrToFloat(Edit3.Text);
 zerodet:=StrToFloat(Edit4.Text);
 
 BairstowInterval(n,aInterval,mit,mincorr,zerodet,zInterval,wInterval,it,st);
-ListBox1.Items.Add('z[1].re = (' + floattostr(zInterval[1].re.a)+' ; '+
-floattostr(zInterval[1].re.b)+')');
-//Wypisz(z,w,it,st,ListBox1);
+
+WypiszInterval(zInterval,wInterval,it,st,ListBox1);
 end;
 
 
@@ -161,24 +162,37 @@ end;
 
 procedure TForm1.WypiszInterval;
 var i:Integer;
+left,right:string;
 begin
 ListBox1.Items.Add('it = '+IntToStr(it));
 ListBox1.Items.Add('st = '+IntToStr(st));
 if(st=0) then
 begin
 ListBox1.Items.Add('');
-  for i := 1 to Length(z)-1 do
+  for i := 1 to Length(zInterval)-1 do
     begin
-        ListBox1.Items.Add('z[i].re = (' + floattostr(zInterval[i].re.a)+' ; '+
-        floattostr(zInterval[i].re.b)+')');
+       // ListBox1.Items.Add('z['+Inttostr(i)+'].re = (' + floattostr(zInterval[i].re.a)+' ; '+
+        //floattostr(zInterval[i].re.b)+')');
 
-        ListBox1.Items.Add('z[i].im = (' + floattostr(zInterval[i].im.a)+' ; '+
-        floattostr(zInterval[i].im.b)+')');
+        //ListBox1.Items.Add('z['+Inttostr(i)+'].im = (' + floattostr(zInterval[i].im.a)+' ; '+
+        //floattostr(zInterval[i].im.b)+')');
+        iends_to_strings(zInterval[i].re,left,right);
+        ListBox1.Items.Add('z['+inttostr(i)+'].re = ('+left+' ; '+right+')');
+        iends_to_strings(zInterval[i].im,left,right);
+        ListBox1.Items.Add('z['+inttostr(i)+'].im = ('+left+' ; '+right+')');
+
     end;
-    for i := 1 to Length(w)-1 do
+    for i := 1 to Length(wInterval)-1 do
     begin
-        ListBox1.Items.Add('w['+IntToStr(i)+'].re = '+FloatToStr(w[i].re));
-        ListBox1.Items.Add('w['+IntToStr(i)+'].im = '+FloatToStr(w[i].im));
+        //ListBox1.Items.Add('w['+Inttostr(i)+'].re = ('  + floattostr(wInterval[i].re.a)+' ; '+
+        //floattostr(wInterval[i].re.b)+')');
+
+        //ListBox1.Items.Add('w['+Inttostr(i)+'].im = (' + floattostr(wInterval[i].im.a)+' ; '+
+        //floattostr(wInterval[i].im.b)+')');
+        iends_to_strings(wInterval[i].re,left,right);
+        ListBox1.Items.Add('w['+inttostr(i)+'].re = ('+left+' ; '+right+')');
+        iends_to_strings(wInterval[i].im,left,right);
+        ListBox1.Items.Add('w['+inttostr(i)+'].im = ('+left+' ; '+right+')');
     end;
 end;
 end;

@@ -25,6 +25,7 @@ TForm1 = class(TForm)
     Label7: TLabel;
     Label8: TLabel;
     procedure Wypisz(z,w:cplxvector; it,st:Integer; ListBox1:TListBox);
+    procedure WypiszInterval(zInterval,wInterval:cplxvectorInterval; it,st:Integer; ListBox1:TListBox);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -66,6 +67,7 @@ I: Integer;
 
 begin
 ListBox1.Clear;
+//zmiennopozycyjna
 if(state=true) then
 begin
 SetLength(a,0);
@@ -80,7 +82,7 @@ SetLength(a,n+1);
 SetLength(z,n+1);
 SetLength(w,n+1);
 for I := 0 to Length(a)-1 do
-    a[I]:=StrToInt(tab[I]);
+    a[I]:=StrToFloat(tab[I]);
 mit:=StrToInt(Edit2.Text);
 mincorr:=StrToFloat(Edit3.Text);
 zerodet:=StrToFloat(Edit4.Text);
@@ -88,6 +90,7 @@ zerodet:=StrToFloat(Edit4.Text);
 BairstowNormal(n,a,mit,mincorr,zerodet,z,w,it,st);
 Wypisz(z,w,it,st,ListBox1);
 end
+//przedzialowa
 else if(state=false) then
 begin
 SetLength(aInterval,0);
@@ -98,17 +101,18 @@ tab:=TStringList.Create;
 ExtractStrings([','], [], PChar(s), tab);
 n:=tab.Count-1;
 Label3.Caption:=IntToStr(n);
-SetLength(a,n+1);
-SetLength(z,n+1);
-SetLength(w,n+1);
-for I := 0 to Length(a)-1 do
-    a[I]:=StrToInt(tab[I]);
+SetLength(aInterval,n+1);
+SetLength(zInterval,n+1);
+SetLength(wInterval,n+1);
+for I := 0 to Length(aInterval)-1 do
+    aInterval[I]:=StrToInt(tab[I]);
 mit:=StrToInt(Edit2.Text);
 mincorr:=StrToFloat(Edit3.Text);
 zerodet:=StrToFloat(Edit4.Text);
 
 BairstowInterval(n,aInterval,mit,mincorr,zerodet,zInterval,wInterval,it,st);
-//Wypisz(z,w,it,st,ListBox1);
+
+WypiszInterval(zInterval,wInterval,it,st,ListBox1);
 end;
 
 
@@ -123,13 +127,10 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 begin
 state:=true;
-Label8.Caption:='zmiennopozyc..';
+Label8.Caption:='zmiennopozyc.';
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-x:Interval;
-y:Interval;
 begin
 state:=true;
 Label8.caption:='zmiennopozyc.';
@@ -152,6 +153,33 @@ ListBox1.Items.Add('');
     begin
         ListBox1.Items.Add('w['+IntToStr(i)+'].re = '+FloatToStr(w[i].re));
         ListBox1.Items.Add('w['+IntToStr(i)+'].im = '+FloatToStr(w[i].im));
+    end;
+end;
+end;
+
+procedure TForm1.WypiszInterval;
+var i:Integer;
+left,right:string;
+begin
+ListBox1.Items.Add('it = '+IntToStr(it));
+ListBox1.Items.Add('st = '+IntToStr(st));
+if(st=0) then
+begin
+ListBox1.Items.Add('');
+  for i := 1 to Length(zInterval)-1 do
+    begin
+        iends_to_strings(zInterval[i].re,left,right);
+        ListBox1.Items.Add('z['+inttostr(i)+'].re = ('+left+' ; '+right+')');
+        iends_to_strings(zInterval[i].im,left,right);
+        ListBox1.Items.Add('z['+inttostr(i)+'].im = ('+left+' ; '+right+')');
+
+    end;
+    for i := 1 to Length(wInterval)-1 do
+    begin
+        iends_to_strings(wInterval[i].re,left,right);
+        ListBox1.Items.Add('w['+inttostr(i)+'].re = ('+left+' ; '+right+')');
+        iends_to_strings(wInterval[i].im,left,right);
+        ListBox1.Items.Add('w['+inttostr(i)+'].im = ('+left+' ; '+right+')');
     end;
 end;
 end;
